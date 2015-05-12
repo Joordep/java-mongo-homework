@@ -1,13 +1,9 @@
 package aula;
 
-import java.awt.List;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -58,7 +54,7 @@ public class Crud {
         		System.out.println(Messages.WAIT_INPUT);
                 String userInput = reader.readLine();
                 
-                ArrayList<String> data = handleInput(userInput);
+                ArrayList<String> data = parseInput(userInput);
                 for (String e: data) {
                 	System.out.println(e);
                 }
@@ -72,22 +68,42 @@ public class Crud {
     private void handlesExcp(Exception e) {
     	 if (e.getMessage().equals(Constants.INVALID_INPUT)) {
 			 System.out.println(Messages.INVALID_INPUT_WARN);
-			 return;
          }
     }
     
-    private ArrayList<String> handleInput(String userInput) throws Exception {
+    private ArrayList<String> parseInput(String userInput) throws Exception {
     	ArrayList<String> mArray = new ArrayList<String>();
     	
-    	Matcher m = regexValidator.validateInsert(userInput);
+    	String action = getAction(userInput);
     	
-    	if (m.find()) {
-    		System.out.println("ok");
-    	} else {
-    		throw new Exception(Constants.INVALID_INPUT);
+		switch (action.toUpperCase()) {
+    		case Constants.INSERT:
+    			break;
+    		case Constants.DELETE:
+    			break;
+    		case Constants.UPDATE:
+    			break;
+    		case Constants.QUERY:
+    			break;
+    		case Constants.HELP:
+    			System.out.println(Messages.HELP);
+    			break;
+    		case "Q":
+    		case "QUIT":
+    			this.running = false;
+    			break;
+    		default:
+    			throw new Exception(Constants.INVALID_INPUT);
     	}
-    	
     	return mArray;
+    }
+    
+    /**
+     * insert {vinho: Intenso maria pode, ano: 1978, origem: Londres, valor: 5600.64, qtd: 4}
+     */
+    private String getAction(String userInput) {
+    	return userInput.split("\\{")[0];
+    	
     }
     
     public void greeting() {
