@@ -5,6 +5,12 @@ import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 
+import com.mongodb.BasicDBObject;
+import com.mongodb.DB;
+import com.mongodb.DBCollection;
+import com.mongodb.DBCursor;
+import com.mongodb.MongoClient;
+
 /**
  *
  * @author 123244
@@ -78,6 +84,13 @@ public class Crud {
     	
 		switch (action.toUpperCase()) {
     		case Constants.INSERT:
+    			Matcher m = regexValidator.validateInsert(userInput);
+    			if (m.find()) {
+    				
+    			} else {
+    				throw new Exception(Constants.INVALID_INPUT);
+    			}
+//	    			insert
     			break;
     		case Constants.DELETE:
     			break;
