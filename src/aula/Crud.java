@@ -1,4 +1,4 @@
-package Aula;
+package aula;
 
 import java.awt.List;
 import java.io.BufferedReader;
@@ -18,7 +18,7 @@ public class Crud {
 	private boolean running = true;
 	
 	/**
-	 * Variável usada para validar as entradas do usuário
+	 * Variï¿½vel usada para validar as entradas do usuï¿½rio
 	 */
 	private RegexValidator regexValidator = new RegexValidator();
 	

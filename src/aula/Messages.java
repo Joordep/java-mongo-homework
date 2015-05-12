@@ -1,4 +1,4 @@
-package Aula;
+package aula;
 
 public final class Messages {
     public static final String WELCOME = "MongoDB para vinhos.";
@@ -6,7 +6,7 @@ public final class Messages {
     public static final String WAIT_INPUT = "Digite a operacao desejada:"
        + "\n*help*, *insert*, *delete*, *update*, *query*, *exit*";
     
-    public static final String INVALID_INPUT_WARN = "Sua entrada não é válida. Digite 'help' para exemplos.";
+    public static final String INVALID_INPUT_WARN = "Sua entrada nï¿½o ï¿½ vï¿½lida. Digite 'help' para exemplos.";
     		
     public static final String HELP;
 

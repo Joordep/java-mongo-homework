@@ -1,4 +1,4 @@
-package Aula;
+package aula;
 
 import java.util.regex.Pattern;
 

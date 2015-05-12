@@ -10,7 +10,7 @@ editar o arquivo /etc/mongosmongod.conf e setar a linha
 bind_ip = 0.0.0.0 (default é 127.0.0.1)
 
 */
-package Aula;
+package aula;
 
 import com.mongodb.BasicDBObject;
 import com.mongodb.DB;
