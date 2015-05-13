@@ -11,7 +11,7 @@ public final class Messages {
     public static final String HELP;
 
     private static final String HELP_INSERT = "--- insert {"
-        + "nome: Château Lafite Rothschild, "
+        + "nome: Chateau Lafite Rothschild, "
         + "ano: 1787,"
         + "origem: Londres"
         + "valor: 500.64"

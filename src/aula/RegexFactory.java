@@ -26,7 +26,7 @@ public class RegexFactory {
 	 * UPDATE_PATTERN 
 	 * update example: update {vinho: Château Lafite Rothschild, add OU rem : 3} (aumenta/diminui a quantidade em 3)"
 	 */
-	private static final String UPDATE_PATTERN = "(^[a-zA-Z]+)\\s*\\{(\\w+):\\s*([a-zA-Z\\s]+)\\s*, (\\w+):\\s*([0-9]+)\\s*}";
+	private static final String UPDATE_PATTERN = "(^[a-zA-Z]+)\\s*\\{(\\w+):\\s*([a-zA-Z\\s]+)\\s*, (\\w+):\\s*([\\w]+)\\s*}";
 	
 	/**
 	 *  QUERY_PATTERN

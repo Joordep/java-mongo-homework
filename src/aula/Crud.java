@@ -47,7 +47,6 @@ public class Crud {
     
     private void insert(HashMap<String, String> obj) throws Exception {
     	BasicDBObject doc = getDBObject(obj);
-    	//ex:	insert {nome: Vinho Italianissimo, ano: 1978, origem: Londres, valor: 5600.64, qtd: 4}        
     	coll.insert(doc);
     }
     
@@ -56,6 +55,27 @@ public class Crud {
     	coll.remove(doc);
     }
     
+    /**
+     * updates a database find
+     * 
+     * currently only finding by name and updating quantities xD
+     * @param obj
+     * @throws Exception
+     */
+    private void update(HashMap<String, String> obj) throws Exception {
+    	BasicDBObject doc = new BasicDBObject(Constants.NAME, obj.get(Constants.NAME));
+    	coll.update(doc, new BasicDBObject("$set", new BasicDBObject(Constants.QTT, obj.get(Constants.QTT))));
+    }
+    
+    private void query(HashMap<String, String> obj) throws Exception {
+
+    }
+    
+    /**
+     * Generates a new DB Object from the hashmap of data
+     * @param obj
+     * @return
+     */
     private BasicDBObject getDBObject(HashMap<String, String> obj) {
     	BasicDBObject doc = new BasicDBObject();
     	for (Map.Entry<String, String> entry : obj.entrySet()) {
@@ -64,21 +84,6 @@ public class Crud {
     		}
         }
     	return doc;
-    }
-    
-    /**
-     * updates a database find
-     * 
-     * currently only updating quantities xD
-     * @param obj
-     * @throws Exception
-     */
-    private void update(HashMap<String, String> obj) throws Exception {
-
-    }
-    
-    private void query(HashMap<String, String> obj) throws Exception {
-
     }
     
     /**
@@ -107,6 +112,7 @@ public class Crud {
                 	break;
                 case Constants.UPDATE:
                 	update(queryMap);
+                	System.out.printf("Vinho %s updateado com sucesso!\n\n", queryMap.get(Constants.NAME));
                 	break;
                 case Constants.QUERY:
                 	query(queryMap);
@@ -168,6 +174,7 @@ public class Crud {
 				
 				// currently only supporting deletes by name 
 				// TODO add delete by price (>500) || (<300) - update regexValidator.validateDelete
+				// TODO REFACTOR - pass to specialized method
 				switch(m.group(2)) {
 				case Constants.NAME:
 					queryMap.put(Constants.NAME, m.group(3));
@@ -182,9 +189,21 @@ public class Crud {
 			break;
 		case Constants.UPDATE:
 			m = regexValidator.validateUpdate(userInput);
-	    	// "--- update {vinho: Château Lafite Rothschild, add OU rem qtd +3} (aumenta/diminui a quantidade em 3)"
 			if (m.find()) {
+				queryMap.put(Constants.ACTION, Constants.UPDATE);
+				queryMap.put(Constants.NAME, m.group(3));
 				
+				// same as delete -- currently only supporting deletes by qtt 
+				// TODO add change cost - update regexValidator.validateUpdate
+				// TODO REFACTOR - pass to specialized method
+				switch(m.group(4)) {
+				case Constants.QTT:
+					queryMap.put(Constants.QTT, m.group(5));
+					break;
+				case Constants.COST:
+					// TODO
+					break;
+				}
 			} else {
 				throw new Exception(Constants.INVALID_INPUT);
 			}
