@@ -24,13 +24,13 @@ public class RegexFactory {
 	
 	/**
 	 * UPDATE_PATTERN 
-	 * update example: update {vinho: Château Lafite Rothschild, add OU rem : 3} (aumenta/diminui a quantidade em 3)"
+	 * update example: update {vinho: Chateau Lafite Rothschild, qtt: 6}"
 	 */
 	private static final String UPDATE_PATTERN = "(^[a-zA-Z]+)\\s*\\{(\\w+):\\s*([a-zA-Z\\s]+)\\s*, (\\w+):\\s*([\\w]+)\\s*}";
 	
 	/**
 	 *  QUERY_PATTERN
-	 *  query example: query {ano: 1787} (busca todos os vinhos do ano de 1787)"
+	 *  query example: query {nome: Teste} "
 	 */
 	private static final String QUERY_PATTERN = "(^[a-zA-Z]+)\\s*\\{(\\w+):\\s*([a-zA-Z0-9]+)\\s*}";
 	
