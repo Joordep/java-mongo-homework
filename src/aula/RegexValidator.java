@@ -14,9 +14,9 @@ public class RegexValidator {
 	
 	private final Pattern DELETE_PATTERN = RegexFactory.getDeletePattern();
 	
-	private final Pattern UPDATE_PATTERN = RegexFactory.getDeletePattern();
+	private final Pattern UPDATE_PATTERN = RegexFactory.getUpdatePattern();
 	
-	private final Pattern QUERY_PATTERN = RegexFactory.getDeletePattern();
+	private final Pattern QUERY_PATTERN = RegexFactory.getQueryPattern();
 	
 	public Matcher validateInsert(String input) {
 		return INSERT_PATTERN.matcher(input);

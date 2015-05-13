@@ -25,7 +25,7 @@ public final class Messages {
 
     private static final String HELP_UPDATE = 
         "--- update {vinho: Château Lafite Rothschild, add OU rem qtd +3} (aumenta/diminui a quantidade em 3)"
-        + "\n--- update {vinho: Château Lafite Rothschild, val 3000.99} (aumenta/diminui a quantidade em 3)";
+        + "\n--- update {vinho: Château Lafite Rothschild, val 3000.99} (seta novo valor)";
 
     private static final String HELP_QUERY =
         "--- query {ano: 1787} (busca todos os vinhos do ano de 1787)"

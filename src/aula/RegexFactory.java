@@ -46,7 +46,7 @@ public class RegexFactory {
 		return Pattern.compile(UPDATE_PATTERN);
 	}
 	
-	static Pattern getQueryattern() {
+	static Pattern getQueryPattern() {
 		return Pattern.compile(QUERY_PATTERN);
 	}
 }

@@ -8,7 +8,7 @@ package aula;
 public class Constants {
 	public final static String INVALID_INPUT = "INVALID_INPUT";
 	
-	public final static String ACAO = "acao";
+	public final static String ACTION = "acao";
 	
 	public final static String INSERT = "insert";
 	
@@ -20,13 +20,15 @@ public class Constants {
 	
 	public final static String HELP = "help";
 	
-	public final static String VALOR = "valor";
+	public final static String COST = "valor";
 	
-	public final static String ANO = "valor";
+	public final static String YEAR = "valor";
 	
-	public final static String QTD = "qtd";
+	public final static String QTT = "qtd";
 	
-	public final static String NOME_VINHO = "nome";
+	public final static String NAME = "nome";
 	
-	public final static String ORIGEM = "origem";
+	public final static String PLACE_OF_ORIGIN = "origem";
+	
+	public final static String EXIT = "EXIT";
 }
