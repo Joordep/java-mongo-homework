@@ -10,7 +10,7 @@ public class RegexFactory {
 	
 	/**
 	 * INSERT_PATTERN
-	 * insert working example: insert {vinho: Chateau Ste, ano: 1997, origem: France, valor: 500.00, qtd: 3}
+	 * insert example: insert {vinho: Chateau Ste, ano: 1997, origem: France, valor: 500.00, qtd: 3}
 	 * 
 	 * This is pretty huge indeed. No time to make it pretty though XD
 	 */
@@ -18,21 +18,21 @@ public class RegexFactory {
 	
 	/**
 	 * DELETE_PATTERN
-	 * TODO
+	 * delete example: delete {vinho: Chateau Lafite Rothschild}"
 	 */
-	private static final String DELETE_PATTERN = "";
+	private static final String DELETE_PATTERN = "(^[a-zA-Z]+)\\s*\\{(\\w+):\\s*([a-zA-Z\\s]+)\\s*}";
 	
 	/**
 	 * UPDATE_PATTERN 
-	 * TODO
+	 * update example: update {vinho: Château Lafite Rothschild, add OU rem : 3} (aumenta/diminui a quantidade em 3)"
 	 */
-	private static final String UPDATE_PATTERN = "";
+	private static final String UPDATE_PATTERN = "(^[a-zA-Z]+)\\s*\\{(\\w+):\\s*([a-zA-Z\\s]+)\\s*, (\\w+):\\s*([0-9]+)\\s*}";
 	
 	/**
 	 *  QUERY_PATTERN
-	 *  TODO
+	 *  query example: query {ano: 1787} (busca todos os vinhos do ano de 1787)"
 	 */
-	private static final String QUERY_PATTERN = "";
+	private static final String QUERY_PATTERN = "(^[a-zA-Z]+)\\s*\\{(\\w+):\\s*([a-zA-Z0-9]+)\\s*}";
 	
 	static Pattern getInsertPattern() {
 		return Pattern.compile(INSERT_PATTERN);

@@ -37,8 +37,8 @@ public class Crud {
     		mongo = new MongoClient("192.168.1.104", 27017 );
     		List<String> dbs = mongo.getDatabaseNames();
             System.out.println("Bancos de dados disponiveis: " + dbs + "\n");
-//    		db = mongo.getDB("vinhoDB");
-//    		db.getCollection("vinho");
+    		db = mongo.getDB("vinhoDB");
+    		coll = db.getCollection("vinho");
     	} catch (Exception e) {
     		e.printStackTrace();
     		System.exit(1);
@@ -47,26 +47,38 @@ public class Crud {
     
     private void insert(HashMap<String, String> obj) throws Exception {
     	BasicDBObject doc = new BasicDBObject();
-    	//ex:	insert {vinho: Intenso maria pode, ano: 1978, origem: Londres, valor: 5600.64, qtd: 4}        
+    	//ex:	insert {nome: Vinho Italianissimo, ano: 1978, origem: Londres, valor: 5600.64, qtd: 4}        
     	for (Map.Entry<String, String> entry : obj.entrySet()) {
     		if (!entry.getKey().equals(Constants.ACTION)) {
     			doc.append(entry.getKey(), entry.getValue());
     		}
         }
-//    	coll.insert(doc);
+    	coll.insert(doc);
     }
     
     private void delete(HashMap<String, String> obj) throws Exception {
-    	//"--- delete {vinho: Château Lafite Rothschild} (deleta todos vinhos com esse nome)"
-    	
+    	BasicDBObject doc = new BasicDBObject();
+    	for (Map.Entry<String, String> entry : obj.entrySet()) {
+    		if (!entry.getKey().equals(Constants.ACTION)) {
+    			doc.append(entry.getKey(), entry.getValue());
+    		}
+        }
+    	coll.remove(doc);
     }
     
+    /**
+     * updates a database find
+     * 
+     * currently only updating quantities xD
+     * @param obj
+     * @throws Exception
+     */
     private void update(HashMap<String, String> obj) throws Exception {
-    	// "--- update {vinho: Château Lafite Rothschild, add OU rem qtd +3} (aumenta/diminui a quantidade em 3)"
+
     }
     
     private void query(HashMap<String, String> obj) throws Exception {
-    	//"--- query {ano: 1787} (busca todos os vinhos do ano de 1787)"
+
     }
     
     /**
@@ -87,9 +99,11 @@ public class Crud {
                 switch (queryMap.get(Constants.ACTION)) {
                 case Constants.INSERT:
                 	insert(queryMap);
+                	System.out.printf("Vinho %s adicionado com sucesso!\n\n", queryMap.get(Constants.NAME));
                 	break;
                 case Constants.DELETE:
                 	delete(queryMap);
+                	System.out.printf("Vinho %s removido com sucesso!\n\n", queryMap.get(Constants.NAME));
                 	break;
                 case Constants.UPDATE:
                 	update(queryMap);
@@ -134,52 +148,65 @@ public class Crud {
     	
     	Matcher m = null;
 		switch (action.toLowerCase().trim()) {
-    		case Constants.INSERT:
-    			m = regexValidator.validateInsert(userInput);
-    			if (m.find()) {
-    				queryMap.put(Constants.ACTION, Constants.INSERT);
-    				queryMap.put(Constants.NAME, m.group(3));
-    				queryMap.put(Constants.YEAR, m.group(5));
-    				queryMap.put(Constants.PLACE_OF_ORIGIN, m.group(7));
-    				queryMap.put(Constants.COST, m.group(9));
-    				queryMap.put(Constants.QTT, m.group(11));
-    			} else {
-    				throw new Exception(Constants.INVALID_INPUT);
-    			}
-    			break;
-    		case Constants.DELETE:
-    			m = regexValidator.validateDelete(userInput);
-    			if (m.find()) {
-    				
-    			} else {
-    				throw new Exception(Constants.INVALID_INPUT);
-    			}
-    			break;
-    		case Constants.UPDATE:
-    			m = regexValidator.validateUpdate(userInput);
-    			if (m.find()) {
-    				
-    			} else {
-    				throw new Exception(Constants.INVALID_INPUT);
-    			}
-    			break;
-    		case Constants.QUERY:
-    			m = regexValidator.validateQuery(userInput);
-    			if (m.find()) {
-    				
-    			} else {
-    				throw new Exception(Constants.INVALID_INPUT);
-    			}
-    			break;
-    		case Constants.HELP:
-    			queryMap.put(Constants.ACTION, Constants.HELP);
-    			break;
-    		case "Q":
-    		case "QUIT":
-    			queryMap.put(Constants.ACTION, Constants.EXIT);
-    			break;
-    		default:
-    			throw new Exception(Constants.INVALID_INPUT);
+		case Constants.INSERT:
+			m = regexValidator.validateInsert(userInput);
+			if (m.find()) {
+				queryMap.put(Constants.ACTION, Constants.INSERT);
+				queryMap.put(Constants.NAME, m.group(3));
+				queryMap.put(Constants.YEAR, m.group(5));
+				queryMap.put(Constants.PLACE_OF_ORIGIN, m.group(7));
+				queryMap.put(Constants.COST, m.group(9));
+				queryMap.put(Constants.QTT, m.group(11));
+			} else {
+				throw new Exception(Constants.INVALID_INPUT);
+			}
+			break;
+		case Constants.DELETE:
+			m = regexValidator.validateDelete(userInput);
+			if (m.find()) {
+				queryMap.put(Constants.ACTION, Constants.DELETE);
+				
+				// currently only supporting deletes by name 
+				// TODO add delete by price (>500) || (<300) - update regexValidator.validateDelete
+				switch(m.group(2)) {
+				case Constants.NAME:
+					queryMap.put(Constants.NAME, m.group(3));
+					break;
+				case Constants.COST:
+					// TODO
+					break;
+				}
+			} else {
+				throw new Exception(Constants.INVALID_INPUT);
+			}
+			break;
+		case Constants.UPDATE:
+			m = regexValidator.validateUpdate(userInput);
+	    	// "--- update {vinho: Château Lafite Rothschild, add OU rem qtd +3} (aumenta/diminui a quantidade em 3)"
+			if (m.find()) {
+				
+			} else {
+				throw new Exception(Constants.INVALID_INPUT);
+			}
+			break;
+		case Constants.QUERY:
+			m = regexValidator.validateQuery(userInput);
+	    	//"--- query {ano: 1787} (busca todos os vinhos do ano de 1787)"
+			if (m.find()) {
+				
+			} else {
+				throw new Exception(Constants.INVALID_INPUT);
+			}
+			break;
+		case Constants.HELP:
+			queryMap.put(Constants.ACTION, Constants.HELP);
+			break;
+		case "q":
+		case "quit":
+			queryMap.put(Constants.ACTION, Constants.EXIT);
+			break;
+		default:
+			throw new Exception(Constants.INVALID_INPUT);
     	}
     	return queryMap;
     }

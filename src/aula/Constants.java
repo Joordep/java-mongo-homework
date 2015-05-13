@@ -3,7 +3,8 @@ package aula;
 /**
  * This class holds the constants used throughout the code
  * @author natan
- *
+ * 
+ * these could very well be an enum though...
  */
 public class Constants {
 	public final static String INVALID_INPUT = "INVALID_INPUT";
