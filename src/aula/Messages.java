@@ -27,7 +27,7 @@ public final class Messages {
         */
 
     private static final String HELP_UPDATE = 
-        + "\n--- update {nome: Chateau Lafite Rothschild, val: 3000.99} (seta novo valor)";
+        "\n--- update {nome: Chateau Lafite Rothschild, val: 3000.99} (seta novo valor)";
 
     private static final String HELP_QUERY =
         "--- query {nome: Super Vinho}";
