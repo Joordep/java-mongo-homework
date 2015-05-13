@@ -46,24 +46,24 @@ public class Crud {
     }
     
     private void insert(HashMap<String, String> obj) throws Exception {
-    	BasicDBObject doc = new BasicDBObject();
+    	BasicDBObject doc = getDBObject(obj);
     	//ex:	insert {nome: Vinho Italianissimo, ano: 1978, origem: Londres, valor: 5600.64, qtd: 4}        
-    	for (Map.Entry<String, String> entry : obj.entrySet()) {
-    		if (!entry.getKey().equals(Constants.ACTION)) {
-    			doc.append(entry.getKey(), entry.getValue());
-    		}
-        }
     	coll.insert(doc);
     }
     
     private void delete(HashMap<String, String> obj) throws Exception {
+    	BasicDBObject doc = getDBObject(obj);
+    	coll.remove(doc);
+    }
+    
+    private BasicDBObject getDBObject(HashMap<String, String> obj) {
     	BasicDBObject doc = new BasicDBObject();
     	for (Map.Entry<String, String> entry : obj.entrySet()) {
     		if (!entry.getKey().equals(Constants.ACTION)) {
     			doc.append(entry.getKey(), entry.getValue());
     		}
         }
-    	coll.remove(doc);
+    	return doc;
     }
     
     /**
