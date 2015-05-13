@@ -10,7 +10,8 @@ public final class Messages {
     		
     public static final String HELP;
 
-    private static final String HELP_INSERT = "--- insert {"
+    private static final String HELP_INSERT = 
+    	"--- insert {"
         + "nome: Chateau Lafite Rothschild, "
         + "ano: 1787,"
         + "origem: Londres"
@@ -18,7 +19,7 @@ public final class Messages {
         + "qtd: 4}";
 
     private static final String HELP_DELETE = 
-        "--- delete {nome: Château Lafite Rothschild} (deleta todos vinhos com esse nome)";
+        "--- delete {nome: Chateau Lafite Rothschild} (deleta todos vinhos com esse nome)";
         /* TODO?
         + "\n--- delete {ano: 1787} (deleta todos vinhos desse ano)"
         + "\n--- delete {origem: Londres} (deleta todos vinhos dessa localidade)"
@@ -26,13 +27,10 @@ public final class Messages {
         */
 
     private static final String HELP_UPDATE = 
-        "--- update {vinho: Château Lafite Rothschild, add OU rem: 3} (aumenta/diminui a quantidade em 3)"
-        + "\n--- update {vinho: Château Lafite Rothschild, val: 3000.99} (seta novo valor)";
+        + "\n--- update {vinho: Chateau Lafite Rothschild, val: 3000.99} (seta novo valor)";
 
     private static final String HELP_QUERY =
-        "--- query {ano: 1787} (busca todos os vinhos do ano de 1787)"
-        + "\n--- query {origem: Londres} (busca todos os vinhos de Londres)"
-        + "\n--- query {valor: gt _OU_ lt 500.00} (busca todos os vinhos com valor maior/menor que 500)";
+        "--- query {nome: Super Vinho}";
     
     static {
         HELP = new String().format(
